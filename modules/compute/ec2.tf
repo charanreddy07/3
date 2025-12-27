@@ -52,9 +52,17 @@ resource "aws_launch_template" "app_lt" {
     #!/bin/bash
     echo "Starting application..."
     sudo apt update -y
-    sudo apt install -y nginx
+    sudo apt install -y nginx openjdk-11-jdk
     sudo systemctl start nginx
     sudo systemctl enable nginx
+
+    # Install Jenkins
+    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+    sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+    sudo apt update -y
+    sudo apt install -y jenkins
+    sudo systemctl start jenkins
+    sudo systemctl enable jenkins
   EOF
   )
 

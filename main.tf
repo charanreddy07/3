@@ -1,3 +1,12 @@
+module "region" {
+  source = "./modules/region"
+  aws_region = var.aws_region
+}
+
+provider "aws" {
+  region = module.region.region
+}
+
 module "networking" {
   source = "./modules/networking"
 
