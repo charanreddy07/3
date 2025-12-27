@@ -3,7 +3,6 @@
 ## **Overview**
 This repository contains Terraform scripts to deploy a **3-tier web application** on AWS, following best practices for **scalability, security, and maintainability**.
 
-medium:https://medium.com/@ganesharavind124/deploying-a-3-tier-application-on-aws-using-terraform-fb6da0385193
 
 ### **Architecture**
 - **Presentation Layer (Web Tier)** – Public-facing EC2 instances behind an **Application Load Balancer (ALB)**.
