@@ -42,3 +42,12 @@ module "jenkins" {
   aws_access_key_id    = var.jenkins_aws_access_key_id
   aws_secret_access_key = var.jenkins_aws_secret_access_key
 }
+
+module "github_webhook_lambda" {
+  source        = "./modules/github_webhook_lambda"
+  function_name = "github-webhook-handler"
+}
+
+output "github_webhook_url" {
+  value = module.github_webhook_lambda.webhook_url
+}
