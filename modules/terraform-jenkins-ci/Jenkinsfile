@@ -6,6 +6,18 @@ pipeline {
     }
 
     stages {
+        stage('Fetch AWS Credentials') {
+            steps {
+                withCredentials([string(credentialsId: 'jenkins-aws-credentials', variable: 'SECRET_ARN')]) {
+                    sh '''
+                        CREDS=$(aws secretsmanager get-secret-value --region $AWS_REGION --secret-id $SECRET_ARN --query SecretString --output text)
+                        export AWS_ACCESS_KEY_ID=$(echo $CREDS | jq -r .AWS_ACCESS_KEY_ID)
+                        export AWS_SECRET_ACCESS_KEY=$(echo $CREDS | jq -r .AWS_SECRET_ACCESS_KEY)
+                    '''
+                }
+            }
+        }
+
         stage('Checkout') {
             steps {
                 git 'https://your-repo-url.git'

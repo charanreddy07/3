@@ -27,3 +27,9 @@ module "compute" {
   alb_sg_id        = module.networking.alb_sg_id
   target_group_arn = module.compute.target_group_arn
 }
+
+module "jenkins" {
+  source               = "../jenkins"
+  aws_access_key_id    = var.jenkins_aws_access_key_id
+  aws_secret_access_key = var.jenkins_aws_secret_access_key
+}
